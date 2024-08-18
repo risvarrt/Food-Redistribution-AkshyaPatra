@@ -1,0 +1,130 @@
+{% extends "blog/base.html" %}
+{% load tz %}
+{% block content %}
+<div>
+<div class="heading-title">
+  <legend class="border-bottom mb-4">Our Programs</legend>
+  <p class="lead mt-3"></p>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/Volunteer.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">VOLUNTEER WITH US</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/donate food.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">DONATE FOOD</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/donate fund.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">DONATE FUNDS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/hungers.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">HUNGERS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/emergency reliefs.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">EMERGENCY RELIEFS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/akshaya patra wheel.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">AKSHAYA PATRA WHEELS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/akshaya containers.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">AKSHAYA CONTAINERS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/blog.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">BLOG</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#">
+    <div class="card my-3 shadow p-3 mb-5 bg-white rounded">
+      <img class="img-fluid rounded" src="/media/analysis.jpg" >
+        <div class="card-body">
+
+          <h5 class="card-title">ANALYSIS</h5>
+          <legend class="border-bottom mb-4"></legend>
+          <h6 class="card-text">{{ event.event_description}}</h6>
+        </div>
+    </div>
+    </a>
+  </div>
+  
+</div>
+</div>
+{% endblock content %}

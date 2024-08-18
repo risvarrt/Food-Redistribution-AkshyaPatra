@@ -1,0 +1,179 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section shadow p-3 mb-5 bg-white rounded">
+  <div class="row">
+    <div class="col-12">
+      <div class="card-body">
+        <h5 class="account-heading">
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+          Hello {{ user.username }} 
+          {% if user.profile.premium_accout %}
+          <span class="badge badge-success">Premium</span>
+          {% endif %}
+        </h5><br>
+        <h4 class="card-title">Profile Info</h4>
+        <legend class="border-bottom mb-4"></legend>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">UserName</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ user.username }}</h6>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Email</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ user.email }}</h6>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Type of user</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{request.user.profile.type_of_user}}</h6>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+
+
+        <h4 class="card-title">Further Details</h4>
+        <legend class="border-bottom mb-4"></legend>
+        <table class="table table-borderless">
+          <tbody>
+
+            {% if request.user.profile.nature_of_institution is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Nature of institution</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.nature_of_institution }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.name_of_institution is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Name of Institution</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.name_of_institution }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.your_role is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Role</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.your_role }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.address is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Address</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.address }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.city is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">City</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.city }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.mobile_no is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Mobile no</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.mobile_no }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.pincode is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Pincode</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.pincode }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.does_it_have_kitchen is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Does it have kitchen</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.does_it_have_kitchen }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.does_it_accept_raw_food is not null %}
+            <tr>
+              <th scope="row">
+                <h5 class="card-text">Does it accept raw food</h5>
+              </th>
+              <td>
+                <h6 class="card-text">{{ request.user.profile.does_it_accept_raw_food }}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.please_specify_food_perference %}
+            <tr>
+              <th>
+                <h5 class="card-text">Food perference</h5>
+              </th>
+              <td scope="row">
+                <h6 class="card-text">{{request.user.profile.please_specify_food_perference}}</h6>
+              </td>
+            </tr>
+            {% endif %}
+            {% if request.user.profile.status_of_registration %}
+            <tr>
+              <th>
+                <h5 class="card-text">Status of Registration</h5>
+              </th>
+              <td scope="row">
+                <h6 class="card-text">{{request.user.profile.status_of_registration}}</h6>
+              </td>
+
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+        <div>
+          <a class="float-right btn btn-secondary btn-sm mt-1 mb-1 ml-2"
+            href="{% url 'profile' %}">Edit Bio</a>
+          <a class="float-right btn btn-secondary btn-sm mt-1 mb-1 "
+            href="{% url 'profile1' %}">Edit Organization Details</a>
+        </div>
+
+      </div>
+    </div>
+    <br>
+
+  </div>
+</div><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:500&display=swap" rel="stylesheet">
+  {% if title %}
+  <title>{{ title }} - Akshaya Patra </title>
+  {% else %}
+  <title>Akshaya Patra</title>
+  {% endif %}
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    $(function () {
+      $('a').each(function () {
+        if ($(this).prop('href') == window.location.href) {
+          $(this).addClass('active');
+          $(this).parents('li').addClass('active');
+        }
+      });
+    });
+  </script>
+  
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container">
+        <h3>
+          <a class="navbar-brand mr-4" href="{% url 'blog-index' %}">
+            <img src="/media/TCE.png" width="40" height="40" alt="">
+            Akshaya Patra</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <h5><a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'meeting' %}">Meeting</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'analysis' %}">Report</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'feedback' %}">Feedback</a></h5>
+          </div>
+            <div class="navbar-nav">
+
+            {% if user.is_authenticated %}
+            <h5><a class="nav-item nav-link" href="{% url 'post-create' %}">Donate Food</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'profileview' %}">Profile</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></h5>
+            {% else %}
+            <h5><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></h5>
+            <h5><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></h5>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+    </nav>
+  </header>
+
+  <section class="bg-grey ">
+    <div class="container">
+      <div id="next" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          {% for slider in sliders %}
+          <!-- item -->
+          <div class="carousel-item text-center text-light mb-5 {% if forloop.first %} active{% endif %}">
+            <img class="d-block w-100" src="{{ slider.slider_image.url }}">
+            {% if slider.slider_short is not null %}
+            <div class="carousel-caption d-none d-md-block">
+              <p>{{ slider.slider_short}}</p>
+            </div>
+            {% endif %}
+          </div>
+          <!-- end item -->
+          {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#next" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#next" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card my-3 shadow mb-5 bg-white rounded">
+            <h4 class="card-header">Project Benefits</h4>
+            <div class="card-body">
+              <blockquote class="blockquote text-center mb-0">
+                <h6>
+                 • We strive to mitigate hunger by solving for food wastage.
+
+                </h6>
+                <h6>
+                  • Through our endeavours we work towards closing the gap between the rich and the poor.
+                </h6>
+                <h6>
+                  • People who have balanced meals are healthier and are able to work better to
+                  increase their economic standards and become self-sustained.
+                </h6>
+                <h6>
+                  • Less food waste has both social and environmental benefits. Our initiatives
+                  focus on ensuring minimal wastage wherever possible.
+                </h6>
+                <h6>
+                  • By preventing food from being thrown into garbage dumps near our
+                  residential areas and ever growing landfills we work towards a cleaner India.
+                </h6>
+                <h6>
+                  • Near 42% of all Indian children are undernourished. By balancing meals
+                  according to beneficiary type (proteins for kids, digestible for old, etc.), we
+                  ensure better nutrition intake for all.
+                </h6>
+
+
+
+
+
+              </blockquote>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-6 ">
+          <!-- <div class="col-lg-12 col-sm-12"> -->
+          <div class="card my-3 shadow mb-5 bg-white rounded">
+            <h4 class="card-header">Upcoming Volunteer Meetings</h4>
+            <div class="card-body">
+              <marquee height="160" width="100%" behavior="scroll" direction="up" scrollamount="2"
+                onmouseover="this.stop();" onmouseout="this.start();">
+                <div class="list-group list-group-flush">
+                  {% for meeting in meetings %}
+                  <p class="list-group-item list-group-item-action">{{ meeting.Name}} <small
+                      class="text-muted">{{ meeting.date|date:"F,d" }}
+                      {{ meeting.pick_up_time|time:"H:i A" }}</small>
+                    <span class="badge badge-pill badge-success">
+                      New</span>
+                  </p>
+                  {% endfor %}
+                </div>
+              </marquee>
+            </div>
+            <div class="form-group">
+              <small class="text-muted ml-4">
+                <a href="{% url 'meeting' %}">View all Volunteer Meetings</a>
+              </small>
+            </div>
+
+          </div>
+          <!-- </div> -->
+        </div>
+
+
+        <div class="col-md-6">
+          <!-- <div class="col-lg-12 col-sm-12"> -->
+          <div class="card my-3 shadow mb-5 bg-white rounded">
+            <h4 class="card-header">Available Food</h4>
+            <div class="card-body">
+              <marquee height="160" width="100%" behavior="scroll" direction="up" scrollamount="2"
+                onmouseover="this.stop();" onmouseout="this.start();">
+                <div class="list-group list-group-flush">
+                  {% for meeting in posts %}
+                  <p class="list-group-item list-group-item-action">{{ meeting.title}} <small
+                      class="text-muted">{{ meeting.date|date:"F,d" }}
+                      {{ meeting.pick_up_time|time:"H:i A" }}</small>
+                    {% if meeting.availble_quantity_of_food %}
+                    <span class="badge badge-pill badge-success">
+                      {{ meeting.availble_quantity_of_food }}</span>
+                    {% endif %}
+                  </p>
+                  {% endfor %}
+                </div>
+              </marquee>
+            </div>
+            <div class="form-group">
+              <small class="text-muted ml-4">
+                <a href="{% url 'blog-home' %}">View all Available Foods</a>
+              </small>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-grey">
+    <div class="counter">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="Visitors">
+              <p class="counter-count">200</p>
+              <p class="Visitors-p">Volunteer</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="staff">
+              <p class="counter-count">100</p>
+              <p class="staff-p">Donors</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="students">
+              <p class="counter-count">50</p>
+              <p class="students-p">Hungers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <footer class="bg-primary">
+    <div class="container">
+
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <h5> </h5>
+          <!-- <img src="/media/TCE.png" width="80" height="80" alt=""> -->
+        </div>
+        <div class="col-md-12" style="color: white;">
+          Made by Akshaya Patra Team, TCE
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,391 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p>
+    <a class="float-right btn btn-secondary btn mt-4 mb-1 ml-4" data-toggle="collapse" href="#collapseExample" role="button"
+        aria-expanded="false" aria-controls="collapseExample">
+        Vareity of Food
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="content-section shadow p-3 mb-5 bg-white rounded">
+        <h4 class="card-title">Vareity of Foods</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <img class="img-fluid rounded" src="{{ meetings.image_of_food.url }}">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img1" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img1output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img2" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img2output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img3" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img3output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img4" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img4output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img5" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img5output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img6" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img6output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img7" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img7output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img8" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img8output_.png">
+                    {% endif %}
+                    {% if meetings.image_of_food.url|slice:":24" in "/media/profile_pics/img9" %}
+                    <img class="img-fluid rounded" src="/media/food-test/img9output_.png">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-section shadow p-3 mb-5 bg-white rounded">
+
+    <legend class="border-bottom mb-4">Food Donations</legend>
+    <div class="card-body">
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Donors</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{meetings.author.username}} </h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Address</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{meetings.address}} </h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Date</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{meetings.date|date:"F d, Y"}}</h6>
+                    </td>
+                </tr>
+                {% if meetings.expire_time is not null %}
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Expire time</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{meetings.expire_time|time:"H:i A"}}</h6>
+                    </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Availble quantity of food</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ meetings.availble_quantity_of_food}}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Type of food</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ meetings.type_of_food }}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Contact no</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ meetings.author.profile.mobile_no }}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Details</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{meetings.details_audio}}</h6>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>
+
+<div class="content-section shadow p-3 mb-5 bg-white rounded">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {
+            "packages": ["map"],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            "mapsApiKey": "AIzaSyDdyk0wGQWNTImRrv_XdL68qq8LfgzLyr0"
+        });
+        google.charts.setOnLoadCallback(drawChart);
+        // ['Lat', 'Long', 'Name'],
+        //     [12.733216, -80.009229, 'Annai orphanage home'],
+        //     [12.734385, -80.008524, 'Infosys child care home'],
+        //     [12.733347, -80.005527, 'feeding hungers organisation'],
+        //     [12.731665, -80.007148, 'government caretaking home']
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Lat', 'Long', 'Name'],
+                [9.8829, 78.0826, 'Annai orphanage home'],
+                [9.8819, 78.0836, 'Infosys child care home'],
+                [9.8829, 78.0846, 'feeding hungers organisation'],
+                [9.8839, 78.0856, 'government caretaking home']
+            ]);
+
+            var map = new google.visualization.Map(document.getElementById('map_div'));
+            map.draw(data, {
+                showTooltip: true,
+                showInfoWindow: true
+            });
+        }
+    </script>
+    <div>
+        <h5 class="card-header ">Nearest Hungerspot And Volunteers</h5>
+
+    </div><br>
+    <div class="card-body" id="map_div" style="width: 1050px; height: 500px"></div>
+</div>
+<br><br>
+
+<div class="content-section shadow p-3 mb-5 bg-white rounded">
+    <div class="heading-title">
+        <legend class="border-bottom mb-4">Nearby Volunteer and Hungers</legend>
+        <p class="lead mt-3"></p>
+    </div>
+
+    <div class="row">
+        {% for as in a %}
+        {% if as.profile.type_of_user is 'Volunteer' or 'Hungers(Acceptors)' %}
+        <div class="col-sm-6">
+            <article class="media content-section p-3 mb-5 bg-white rounded">
+                <img class="rounded-circle article-img" src="{{ as.profile.image.url }}">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'user-posts' as.username %}">{{ as.username }}</a>
+                        <small class="text-muted ml-2">{{ as.profile.type_of_user }}</small>
+                    </div>
+                    <h4 class="article-content">{{ as.profile.city }}-{{ as.profile.pincode }}</h4>
+                    <h5 class="article-content">{{ as.profile.mobile_no }}</h5>
+                </div>
+            </article>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<br><br>
+
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header ">Volunteer and Hungers Pannel
+            {% if user.is_authenticated %}
+            <button type="button" class="float-right btn btn-primary ml-3" data-toggle="modal"
+                data-target="#exampleModalCenter">Add Hungers
+            </button>
+            {% else %}
+            <button type="button" class="float-right btn btn-primary ml-3" data-toggle="popover"
+                title="Login to Join the discussion" disabled>Add Hungers
+            </button>
+            {% endif %}</h5>
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Add Hungers</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <fieldset class="form-group">
+                                    {{ comment_form|crispy }}
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-outline-primary" type="submit">Add</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><br>
+    {% for comment in comments %}
+    {% for user in users %}
+    {% if user.username == comment.Name %}
+    <div class="card mb-3">
+
+        <!-- <h5 class="card-header">Comments</h5> -->
+        <div class="card-body">
+            <div class="row ">
+                <div class="col-md-12 mb-3">
+                    <h5 class="card-title"><strong>{{comment.Name}}</strong> </h5>
+                    <table class="table table-borderless">
+                        <tr>
+                            <th scope="row">
+                                <h5 class="card-text">UserName</h5>
+                            </th>
+                            <td>
+                                <h6 class="card-text">{{ user.username }}</h6>
+                            </td>
+                        </tr>
+                        <tbody>
+                            {% if user.profile.your_role is not null %}
+                            <tr>
+                                <th scope="row">
+                                    <h5 class="card-text">Role</h5>
+                                </th>
+                                <td>
+                                    <h6 class="card-text">{{ user.profile.your_role }}</h6>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if user.profile.city is not null %}
+                            <tr>
+                                <th scope="row">
+                                    <h5 class="card-text">City</h5>
+                                </th>
+                                <td>
+                                    <h6 class="card-text">{{ user.profile.city }}</h6>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% if user.profile.mobile_no is not null %}
+                            <tr>
+                                <th scope="row">
+                                    <h5 class="card-text">Mobile no</h5>
+                                </th>
+                                <td>
+                                    <h6 class="card-text">{{ user.profile.mobile_no }}</h6>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <th scope="row">
+                                    <h5 class="card-text">Required Quantity</h5>
+                                </th>
+                                <td>
+                                    <h6 class="card-text">{{comment.Required_Quantity}} kg of food</h6>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <footer class="blockquote-footer">{{comment.Created|date:"F d, Y"}}<cite title="Source Title">
+                            {{comment.Created|time:"H:i A"}}</cite>
+                    </footer>
+
+                </div>
+            </div>
+
+
+            <div>
+
+                <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Volunteer</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="." method="post">
+
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <fieldset class="form-group">
+                                            {{ comment_form1|crispy }}
+                                            <input type="hidden" name="Parent_id" value="{{comment.id}}">
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="close" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button class="btn btn-outline-info" type="submit">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <p>
+                {% if user.is_authenticated %}
+                <button type="button" class="float-right btn btn-primary ml-3" data-toggle="modal" data-target="#reply"
+                    data-whatever="@mdo">Add Volunteer</button>
+                <!-- <a class="float-right btn text-white btn-danger"></i> Like</a> -->
+                {% else %}
+                <button type="button" class="btn btn-primary ml-3" data-toggle="popover"
+                    title="Login to Join the discussion" disabled>Add Volunteer</button>
+                {% endif %}
+                {% if comment.replies.count is not 0 %}
+                <a class="ml-4" data-toggle="collapse" href="#View_all_replies" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    View all Volunteer ({{ comment.replies.count }})
+                </a>
+            </p>
+            <div class="collapse" id="View_all_replies">
+                {% for reply in comment.replies.all %}
+                <div class="card card-inner mb-3">
+                    <!-- style="margin-left: 8rem;" -->
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <p><strong>{{reply.Name}}</strong></a></p>
+                                <footer class="blockquote-footer">{{reply.Created|date:"F d, Y"}}<cite
+                                        title="Source Title">
+                                        {{reply.Created|time:"H:i A"}}</cite></footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+<br><br><br><br>
+{% endblock content %}

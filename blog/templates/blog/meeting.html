@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div >
+
+  <div class="heading-title">
+    <legend class="border-bottom mb-4">Upcoming Meetings</legend>
+    <p class="lead mt-3"></p>
+  </div>
+  <div class="row">
+    {% for event in meeting %}
+    <div class="col-sm-12">
+        <div class="card my-3 shadow p-3 mb-5 bg-grey rounded">
+          <img class="img-fluid rounded" src="{{ event.image.url }}">
+          <div class="card-body">
+
+            <h5 class="card-title">{{ event.Name}}</h5>
+            <legend class="border-bottom mb-4"></legend>
+            <h6 class="card-text">{{ event.Content}}</h6>
+            <p class="mt-2"><small class="text-muted">{{ event.date|date:"F d, Y"}}
+                {{ event.date|time:"H:i A" }}</small></p>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<br>
+{% endblock content %}

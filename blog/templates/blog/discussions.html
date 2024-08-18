@@ -1,0 +1,155 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h5 class="card-header ">Comments
+            {% if user.is_authenticated %}
+            <button type="button" class="float-right btn btn-primary ml-3" data-toggle="modal"
+                data-target="#exampleModalCenter">New
+                Comment</button>
+            {% else %}
+            <button type="button" class="float-right btn btn-primary ml-3" data-toggle="popover"
+                title="Login to Join the discussion" disabled>New
+                Comment</button>
+            {% endif %}</h5>
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">New Comment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <fieldset class="form-group">
+                                    <legend class="border-bottom mb-4">Leave a Comment</legend>
+                                    {{ comment_form|crispy }}
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-outline-primary" type="submit">Comment</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><br>
+    {% for comment in comments %}
+    {% if comment.comment_act %}
+    <div class="card mb-3">
+
+        <!-- <h5 class="card-header">Comments</h5> -->
+        <div class="card-body">
+            <div class="row ">
+                <div class="col-md-12 mb-3">
+                    <h5 class="card-title"><strong>{{comment.Name}}</strong> </h5>
+                    <footer class="blockquote-footer">{{comment.Created|date:"F d, Y"}}<cite title="Source Title">
+                            {{comment.Created|time:"H:i A"}}</cite>
+                    </footer>
+                    <dd class="card-text col-sm-12">{{comment.Body}}</dd>
+
+                    <!-- <p>
+                        {% if user.is_authenticated %}
+                        <button type="button" class="float-right btn btn-primary ml-3" data-toggle="modal"
+                            data-target="#reply" data-whatever="@mdo">Reply</button>
+                        <a class="float-right btn text-white btn-danger"></i> Like</a>
+                        {% else %}
+                        <button type="button" class="float-right btn btn-primary ml-3" data-toggle="popover"
+                            title="Login to Join the discussion" disabled>Reply</button>
+                        {% endif %}
+                    </p> -->
+                </div>
+            </div>
+
+
+            <div>
+
+                <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Reply</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="." method="post">
+
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <fieldset class="form-group">
+                                            <legend class="border-bottom mb-4">Leave a Reply</legend>
+                                            {{ comment_form|crispy }}
+                                            <input type="hidden" name="Parent_id" value="{{comment.id}}">
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="close" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button class="btn btn-outline-info" type="submit">Reply</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <p>
+                {% if user.is_authenticated %}
+                <button type="button" class="float-right btn btn-primary ml-3" data-toggle="modal" data-target="#reply"
+                    data-whatever="@mdo">Reply</button>
+                <!-- <a class="float-right btn text-white btn-danger"></i> Like</a> -->
+                {% else %}
+                <button type="button" class="btn btn-primary ml-3" data-toggle="popover"
+                    title="Login to Join the discussion" disabled>Reply</button>
+                {% endif %}
+                {% if comment.replies.count is not 0 %}
+                <a class="ml-4" data-toggle="collapse" href="#View_all_replies" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    View all replies ({{ comment.replies.count }})
+                </a>
+            </p>
+            <div class="collapse" id="View_all_replies">
+                {% for reply in comment.replies.all %}
+                <div class="card card-inner mb-3">
+                    <!-- style="margin-left: 8rem;" -->
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <p><strong>{{reply.Name}}</strong></a></p>
+                                <footer class="blockquote-footer">{{reply.Created|date:"F d, Y"}}<cite
+                                        title="Source Title">
+                                        {{reply.Created|time:"H:i A"}}</cite></footer>
+                                <dd class="card-text col-sm-12">{{reply.Body}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<br><br><br><br>
+{% endblock content %}

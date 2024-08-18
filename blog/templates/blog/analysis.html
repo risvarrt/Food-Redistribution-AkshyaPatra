@@ -1,0 +1,146 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['line']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'Hungers');
+        data.addColumn('number', 'Donors');
+        data.addColumn('number', 'Volunteer');
+
+        data.addRows([
+            [1, 0, 0, 0],
+            [2, 2, 1, 5],
+            [3, 5, 2, 8],
+            [4, 4, 3, 10],
+            [5, 8, 2, 7],
+            [6, 10, 5, 5],
+            [7, 6, 6, 6],
+            [8, 13, 4, 5],
+            [9, 10, 6, 6],
+            [10, 9, 6, 9],
+
+        ]);
+
+        var options = {
+            chart: {
+                title: 'VOLUNTEER VS DONOR VS HUNGERS',
+                subtitle: ''
+            },
+            width: 950,
+            height: 500,
+            axes: {
+                x: {
+                    0: {
+                        side: 'top'
+                    }
+                }
+            }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Food', 'Quantity'],
+            ['Dosa', 13],
+            ['Rice', 83],
+            ['Parotta', 1.4],
+            ['Upma', 2.3],
+            ['idly', 46],
+            ['Chappati', 50],
+            ['Kichdy', 38],
+        ]);
+
+        var options = {
+            title: 'Vareity of Food',
+            legend: 'none',
+            pieSliceText: 'label',
+            slices: {
+                1: {
+                    offset: 0.1
+                },
+                3: {
+                    offset: 0.1
+                },
+                4: {
+                    offset: 0.1
+                },
+                6: {
+                    offset: 0.1
+                },
+            },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Type of Food', 'Qunatity'],
+        ['Veg',     500],
+        ['Non - Veg',      300],
+        ['Veg / Non - Veg',  400],
+      ]);
+
+      var options = {
+        title: 'Types of Food',
+        pieHole: 0.1,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+      chart.draw(data, options);
+    }
+  </script>
+<div class="row">
+    <legend class="border-bottom mb-4">Vareity and Types of Food Distributed</legend>
+    <p class="lead mt-3"></p>
+    <div class="col-sm-6">
+        <section class="container">
+            <div class="card my-3 shadow bg-white rounded">
+                <div id="piechart" style="width: 500px; height: 500px;"></div>
+            </div>
+        </section>
+    </div>
+    <div class="col-sm-6">
+        <section class="container">
+            <div class="card my-3 shadow bg-white rounded">
+                <div id="donutchart" style="width: 500px; height: 500px;"></div>
+            </div>
+        </section>
+    </div>
+    <legend class="border-bottom mb-4">Contribution by Volunteer, Hungers, and Donors</legend>
+    <p class="lead mt-3"></p>
+    <div class="col-sm-12">
+        <section class="container">
+            <div class="card my-3 shadow bg-white rounded">
+                <div class="card-body">
+                    <div id="line_top_x"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+{% endblock content %}

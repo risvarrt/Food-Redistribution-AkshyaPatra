@@ -1,0 +1,98 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<article class="media content-section shadow p-3 mb-5 bg-white rounded">
+  <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+      <small class="text-muted ml-2">{{ object.date_posted|date:"F d, Y" }}</small>
+      <small class="text-muted ml-3">{{ object.author.profile.mobile_no }}</small>
+    </div>
+    <div>
+      <h2 class="article-title">{{ object.title }}</h2>
+      <hr class="my-3">
+      <!-- <div class="card-body"> -->
+
+        <!-- <h4 class="card-title">{{ meetings.meeting_title}}</h4>
+        <legend class="border-bottom mb-4"></legend> -->
+
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Address</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{object.address}} </h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Date</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{object.date|date:"F d, Y"}}</h6>
+                    </td>
+                </tr>
+                {% if object.expire_time is not null %}
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Expire time</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{object.expire_time|time:"H:i A"}}</h6>
+                    </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Availble quantity of food</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ object.availble_quantity_of_food}}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Type of food</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ object.type_of_food }}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Contact no</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{ object.author.profile.mobile_no }}</h6>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <h5 class="card-text">Details</h5>
+                    </th>
+                    <td>
+                        <h6 class="card-text">{{object.details_audio}}</h6>
+                    </td>
+                </tr>
+            
+            </tbody>
+
+        </table>
+
+    </div>
+    <div>
+      {% if object.author == user %}
+      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+      {% endif %}
+      <a class="float-right btn btn-secondary btn-sm mt-1 mb-1 ml-2"
+        href="{% url 'meeting_detail' slug=object.MSlug %}">Volunteer Dashboard</a>
+      <a class="float-right btn btn-secondary btn-sm mt-1 mb-1 "
+        href="{% url 'discussions' slug=object.MSlug %}">Discussions</a>
+    </div>
+  </div>
+</article>
+<br><br><br><br><br><br>
+{% endblock content %}
